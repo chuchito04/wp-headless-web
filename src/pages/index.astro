@@ -1,6 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { wpquery } from '../graphql/wordpressQuery'
+
+import type { Post } from '../generated/graphql'
+
+const data = await wpquery({
+	query: `
+	{
+		posts{
+    nodes{
+      title
+      slug
+      excerpt
+      date
+      featuredImage {
+        node {
+          id
+        }
+      }
+    }
+  }
+	}
+	`
+})
 ---
 
 <Layout title="Welcome to Astro.">
@@ -38,6 +61,15 @@ import Card from '../components/Card.astro';
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
+		{data.posts.nodes.map((post: Post) => {
+			return(
+				<div>
+					<p>{post.title}</p>
+					<p set:html={post.excerpt}></p>
+					<p>{post.title}</p>
+				</div>
+			)
+		})}
 		<ul role="list" class="link-card-grid">
 			<Card
 				href="https://docs.astro.build/"
