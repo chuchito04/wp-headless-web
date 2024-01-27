@@ -1,0 +1,15 @@
+query Newquery{
+  posts{
+    nodes{
+      title
+      slug
+      excerpt
+      date
+      featuredImage {
+        node {
+          id
+        }
+      }
+    }
+  }
+}
