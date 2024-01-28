@@ -38,6 +38,12 @@ const data = await wpquery({
 		font-size: 20px;
 		line-height: 1.6;
 	}
+
+	.featuredimage{
+		height: 100px;
+		width: 100px;
+	}
+
 </style>
 
 <Layout title="Welcome to Astro.">
@@ -47,7 +53,7 @@ const data = await wpquery({
 				const featuredImage = post.featuredImage?.node; // Verifica si featuredImage y su node existen
 
 				// Parsear la fecha y la hora
-				const postDate = new Date(post.date);
+				const postDate = new Date(post.date as string);
 				const formattedDate = postDate.toLocaleDateString();
 				const formattedTime = postDate.toLocaleTimeString();
 
@@ -57,12 +63,12 @@ const data = await wpquery({
 						<p>Fecha: {formattedDate}</p>
 						<p>Hora: {formattedTime}</p>
 						{featuredImage && (
-							<img
+							<img class="featuredimage"
 								src={featuredImage.sourceUrl}
 								alt={featuredImage.id}
 							/>
 						)}
-						<p set:html={post.content} />
+						<p set:html={post.excerpt} />
 					</div>
 				);
 			})
