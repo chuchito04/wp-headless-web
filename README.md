@@ -12,6 +12,6 @@ https://es-mx.wordpress.org/download/
 ## 2.- Once you have Wordpress installed, go to plugins and install GraphQL:
 
 
-## 3.- Locate wp.astro and edit url for your current GraphQL API, ENJOY.
+## 3.- Locate wordpressQuery.ts inside graphql folder, and edit URL for your current GraphQL API, ENJOY.
 
 
